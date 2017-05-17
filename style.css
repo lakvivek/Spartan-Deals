@@ -648,8 +648,8 @@ ul.mega_dropdown .menu-item .item_link .link_content {
 	height: 50px;
 	margin-right: 2px;
 	position: relative;
-	width: 550px;
-	right: -123px;
+	/*width: 550px;*/
+	right: -427px;
 }
 .header-search .cate-toggler {
 	color: hsl(0, 0%, 30%);
@@ -663,20 +663,20 @@ ul.mega_dropdown .menu-item .item_link .link_content {
 	position: relative;
 }
 .header-search .cate-toggler:after {
-	border-left: 6px solid hsla(0, 0%, 0%, 0);
-	border-right: 6px solid hsla(0, 0%, 0%, 0);
-	border-top: 6px solid;
-	display: block;
+	/*border-left: 6px solid hsla(0, 0%, 0%, 0);*/
+	/*border-right: 6px solid hsla(0, 0%, 0%, 0);*/
+	/*border-top: 6px solid;*/
+	display: none;
 	height: 0;
 	position: absolute;
 	right: 22px;
 	top: 23px;
-	width: 0;
+	width: 100%;
 	content: "";
 }
 .header-search input[type="text"] {
 	border-color: hsl(340, 1%, 55%);
-	border-style: none none none solid;
+	border-style: none none none none;
 	border-width: medium medium medium 2px;
 	color: hsl(0, 0%, 30%);
 	float: left;
@@ -686,7 +686,7 @@ ul.mega_dropdown .menu-item .item_link .link_content {
 	margin: 9px 0 0;
 	outline: medium none;
 	padding: 0 0 0 20px;
-	width: 60%;
+	/*width: 60%;*/
 }
 .header-search button {
 	background: hsl(0, 0%, 100%) none repeat scroll 0 0;
@@ -705,8 +705,8 @@ ul.mega_dropdown .menu-item .item_link .link_content {
 	width: 56px;
 }
 .header-search button:hover {
-	background: #FF8787;
-	color: #fff;
+	/*background: #FF8787;*/
+	/*color: #fff;*/
 }
 .product-category {
 	left: 0;
@@ -723,7 +723,6 @@ ul.mega_dropdown .menu-item .item_link .link_content {
 .product-category ul {
 	background: hsl(0, 0%, 100%) none repeat scroll 0 0;
 	display: none;
-	height: 300px;
 	margin: 0;
 	overflow-y: auto;
 	padding: 5px 0;
@@ -6932,4 +6931,7 @@ h3.widget-title-modal {
 #values, #values th, #values td {
     border: 1px solid black;
 }
-
+#comments {
+	height: 150px; !important;
+	width: 100%; !important;
+}

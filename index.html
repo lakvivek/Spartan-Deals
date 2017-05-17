@@ -1,9 +1,22 @@
-<!doctype html>
+<?php
+$servername = "iamvivek.ipagemysql.com";
+$username = "vivek";
+$password = "vivek123";
+$dbname = "marketplace";
+
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+die("Connection failed: " . $conn->connect_error);
+}
+?>
+
 <html class="no-js" lang="">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title>Home Shop 1 | Assyrian</title>
+	<title>Spartan Deals</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -58,6 +71,32 @@
 	<!-- modernizr JS
 		============================================ -->
 	<script src="js/vendor/modernizr-2.8.3.min.js"></script>
+
+	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+	<script>
+        function myFunction() {
+            var input, filter, ul, li, a, i;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("myUL");
+            li = ul.getElementsByTagName("li");
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("a")[0];
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+
+                }
+            }
+            if(input.value=='') {
+                ul.style.display='none';
+			} else {
+                ul.style.display='inline-block';
+			}
+
+        }
+	</script>
 </head>
 <body class="home">
 <!--[if lt IE 8]>
@@ -237,25 +276,31 @@
 						<div class="col-lg-9 col-md-9">
 							<div class="search-cart-list">
 								<div class="header-search">
-									<div class="cate-toggler">All Categories</div>
-									<div class="product-category">
-										<ul>
-											<li><a href="index.html#">All Categories</a></li>
-											<li><a href="index.html#">Accessories</a></li>
-											<li><a href="index.html#">Bags</a></li>
-                                            <li><a href="index.html#">Shoes</a></li>
-                                            <li><a href="index.html#">Laptops</a></li>
-                                        </ul>
-									</div>
-									<form>
-										<div>
-											<input type="text" onfocus="if (this.value == 'Search product...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search product...';}" value="Search product..." placeholder="">
-											<button type="submit">
+										<div class="cate-toggler">
+											<input type="text" placeholder="search for products" id="myInput" onkeyup="myFunction()">
+											<button>
 												<i class="fa fa-search"></i>
 											</button>
 										</div>
-									</form>
+									<div class="product-category">
+										<ul id="myUL">
+											<li><a href="#"><b>ColdStone</b></a></li>
+											<li><a href="#">Caramel Machiato</a></li>
+											<li><a href="#">Cafe Misto</a></li>
+											<li><a href="#" >Vanilla Sweet Cream Cold Brew</a></li>
+											<li><a href="#">Nitro Cold Brew</a></li>
+											<li><a href="#">Iced Coffee</a></li>
+											<li><a href="#">Coconut Mocha Machiato</a></li>
+											<li><a href="#">Iced Cinnamon Almond Milk Machiato</a></li>
+											<li><a href="#">Vanilla Sweet Cream Cold Brew</a></li>
+											<li><a href="#">Chocolate Smoothie</a></li>
+											<li><a href="#">Java Chip Frappuchino</a></li>
+											<li><a href="#">Cafe Bean Creme Mocha</a></li>
+											<li><a href="#">Latte Machiato</a></li>
+										</ul>
+									</div>
 								</div>
+
 								<div class="cart-total">
 									<ul>
 										<li>
@@ -371,10 +416,10 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active">
-                                <a href="index.html#clothings" aria-controls="clothings" role="tab" data-toggle="tab">CLOTHINGS</a>
+                                <a href="index.html#cold-stone" aria-controls="cold-stone" role="tab" data-toggle="tab">Cold Stone</a>
                             </li>
                             <li role="presentation">
-                                <a href="index.html#shoes" aria-controls="shoes" role="tab" data-toggle="tab">SHOES</a>
+                                <a href="index.html#shoes" aria-controls="shoes" role="tab" data-toggle="tab">Fashionista</a>
                             </li>
                             <li role="presentation">
                                 <a href="index.html#bags" aria-controls="bags" role="tab" data-toggle="tab">bags</a>
@@ -407,343 +452,91 @@
                 <!-- Tab panes -->
                 <div class="clear"></div>
                 <div class="product-list tab-content">
-                    <div role="tabpanel" class="tab-pane fade in active" id="clothings">
+                    <div role="tabpanel" class="tab-pane fade in active" id="cold-stone">
                         <div  class="product-owl-active  indicator-style">
-                            <!-- single group start -->
-                            <div class="product-group">
-                                <!-- single item start -->
-                                <div class="row">
-                                    <div class="col-md-3 col-sm-6">
-                                        <div class="single-item">
-                                            <div class="s-product-img">
-                                                <!-- sale - new  -->
-                                                <div class="sticker-icon">
-                                                    <span class="sticker-bg"></span>
-                                                    <span class="sale sticker-text">sale</span>
-                                                </div>
-                                                <!--/ sale - new -->
-                                                <a href="index.html#">
-                                                    <img alt="" src="img/product/43.jpg" class="primary-image">
-                                                    <img alt="" src="img/product/7.jpg" class="secondary-image">
-                                                </a>
-                                                <div class="price-rate">
-                                                    <!-- Single product hover view-->
-                                                    <div class="global-table">
-                                                        <div class="global-row">
-                                                            <div class="global-cell">
-                                                                <div class="hover-view-content">
-                                                                    <a href="index.html#" class="modal-view detail-link quickview" data-toggle="modal" data-target="#productModal">Quick View</a>
-                                                                    <div class="ratings">
-                                                                        <ul>
-                                                                            <li>
-                                                                                <div class="star">
-                                                                                    <span class="yes"><i class="fa fa-star-o"></i></span>
-                                                                                    <span class="yes"><i class="fa fa-star-o"></i></span>
-                                                                                    <span class="yes"><i class="fa fa-star-o"></i></span>
-                                                                                    <span class="yes"><i class="fa fa-star-o"></i></span>
-                                                                                    <span><i class="fa fa-star-o"></i></span>
-                                                                                </div>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="price-box">
-                                                                        <p class="special-price"><span class="price">£70.00</span></p>
-                                                                        <p class="old-price"> <span class="price"><del>£80.00</del></span></p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!--/ Single product hover view-->
-                                                </div>
-                                                <div class="pro-action">
-                                                    <div class="product-cart-area-list">
-                                                        <div class="cart-btn btn-add-to-cart"><a href="index.html#"><i class="fa fa-shopping-cart"></i>ADD TO CART
-                                                        </a></div>
-                                                        <div class="cart-btn right link-compare"><a href="index.html#" data-toggle="tooltip" data-placement="top" title="Add To Wishlist" ><i class="fa fa-heart-o"></i>
-                                                        </a></div>
-                                                        <div class="cart-btn right link-wishlist"><a href="index.html#" data-toggle="tooltip" data-placement="top" title="Add To Compare"><i class="fa fa-retweet"></i>
-                                                        </a></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-title">
-                                                <a href="index.html#">Aenean eu tristique</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single item end -->
-                            </div>
-                            <!-- single group end -->
-                            <!-- single group start -->
-                            <div class="product-group">
-                                <!-- single item start -->
-                                <div class="row">
-                                    <div class="col-md-3 col-sm-6">
-                                        <div class="single-item">
-                                            <div class="s-product-img">
-                                                <!-- sale - new  -->
-                                                <div class="sticker-icon">
-                                                    <span class="sticker-bg"></span>
-                                                    <span class="sale sticker-text">sale</span>
-                                                </div>
-                                                <!--/ sale - new -->
-                                                <a href="index.html#">
-                                                    <img alt="" src="img/product/43.jpg" class="primary-image">
-                                                    <img alt="" src="img/product/7.jpg" class="secondary-image">
-                                                </a>
-                                                <div class="price-rate">
-                                                    <!-- Single product hover view-->
-                                                    <div class="global-table">
-                                                        <div class="global-row">
-                                                            <div class="global-cell">
-                                                                <div class="hover-view-content">
-                                                                    <a href="index.html#" class="modal-view detail-link quickview" data-toggle="modal" data-target="#productModal">Quick View</a>
-                                                                    <div class="ratings">
-                                                                        <ul>
-                                                                            <li>
-                                                                                <div class="star">
-                                                                                    <span class="yes"><i class="fa fa-star-o"></i></span>
-                                                                                    <span class="yes"><i class="fa fa-star-o"></i></span>
-                                                                                    <span class="yes"><i class="fa fa-star-o"></i></span>
-                                                                                    <span class="yes"><i class="fa fa-star-o"></i></span>
-                                                                                    <span><i class="fa fa-star-o"></i></span>
-                                                                                </div>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="price-box">
-                                                                        <p class="special-price"><span class="price">£70.00</span></p>
-                                                                        <p class="old-price"> <span class="price"><del>£80.00</del></span></p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!--/ Single product hover view-->
-                                                </div>
-                                                <div class="pro-action">
-                                                    <div class="product-cart-area-list">
-                                                        <div class="cart-btn btn-add-to-cart"><a href="index.html#"><i class="fa fa-shopping-cart"></i>ADD TO CART
-                                                        </a></div>
-                                                        <div class="cart-btn right link-compare"><a href="index.html#" data-toggle="tooltip" data-placement="top" title="Add To Wishlist" ><i class="fa fa-heart-o"></i>
-                                                        </a></div>
-                                                        <div class="cart-btn right link-wishlist"><a href="index.html#" data-toggle="tooltip" data-placement="top" title="Add To Compare"><i class="fa fa-retweet"></i>
-                                                        </a></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-title">
-                                                <a href="index.html#">Aenean eu tristique</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single item end -->
-                            </div>
-                            <!-- single group end -->
-                            <!-- single group start -->
-                            <div class="product-group">
-                                <!-- single item start -->
-                                <div class="row">
-                                    <div class="col-md-3 col-sm-6">
-                                        <div class="single-item">
-                                            <div class="s-product-img">
-                                                <!-- sale - new  -->
-                                                <div class="sticker-icon">
-                                                    <span class="sticker-bg"></span>
-                                                    <span class="sale sticker-text">sale</span>
-                                                </div>
-                                                <!--/ sale - new -->
-                                                <a href="index.html#">
-                                                    <img alt="" src="img/product/43.jpg" class="primary-image">
-                                                    <img alt="" src="img/product/7.jpg" class="secondary-image">
-                                                </a>
-                                                <div class="price-rate">
-                                                    <!-- Single product hover view-->
-                                                    <div class="global-table">
-                                                        <div class="global-row">
-                                                            <div class="global-cell">
-                                                                <div class="hover-view-content">
-                                                                    <a href="index.html#" class="modal-view detail-link quickview" data-toggle="modal" data-target="#productModal">Quick View</a>
-                                                                    <div class="ratings">
-                                                                        <ul>
-                                                                            <li>
-                                                                                <div class="star">
-                                                                                    <span class="yes"><i class="fa fa-star-o"></i></span>
-                                                                                    <span class="yes"><i class="fa fa-star-o"></i></span>
-                                                                                    <span class="yes"><i class="fa fa-star-o"></i></span>
-                                                                                    <span class="yes"><i class="fa fa-star-o"></i></span>
-                                                                                    <span><i class="fa fa-star-o"></i></span>
-                                                                                </div>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="price-box">
-                                                                        <p class="special-price"><span class="price">£70.00</span></p>
-                                                                        <p class="old-price"> <span class="price"><del>£80.00</del></span></p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!--/ Single product hover view-->
-                                                </div>
-                                                <div class="pro-action">
-                                                    <div class="product-cart-area-list">
-                                                        <div class="cart-btn btn-add-to-cart"><a href="index.html#"><i class="fa fa-shopping-cart"></i>ADD TO CART
-                                                        </a></div>
-                                                        <div class="cart-btn right link-compare"><a href="index.html#" data-toggle="tooltip" data-placement="top" title="Add To Wishlist" ><i class="fa fa-heart-o"></i>
-                                                        </a></div>
-                                                        <div class="cart-btn right link-wishlist"><a href="index.html#" data-toggle="tooltip" data-placement="top" title="Add To Compare"><i class="fa fa-retweet"></i>
-                                                        </a></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-title">
-                                                <a href="index.html#">Aenean eu tristique</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single item end -->
-                            </div>
-                            <!-- single group end -->
-                            <!-- single group start -->
-                            <div class="product-group">
-                                <!-- single item start -->
-                                <div class="row">
-                                    <div class="col-md-3 col-sm-6">
-                                        <div class="single-item">
-                                            <div class="s-product-img">
-                                                <!-- sale - new  -->
-                                                <div class="sticker-icon">
-                                                    <span class="sticker-bg"></span>
-                                                    <span class="sale sticker-text">sale</span>
-                                                </div>
-                                                <!--/ sale - new -->
-                                                <a href="index.html#">
-                                                    <img alt="" src="img/product/43.jpg" class="primary-image">
-                                                    <img alt="" src="img/product/7.jpg" class="secondary-image">
-                                                </a>
-                                                <div class="price-rate">
-                                                    <!-- Single product hover view-->
-                                                    <div class="global-table">
-                                                        <div class="global-row">
-                                                            <div class="global-cell">
-                                                                <div class="hover-view-content">
-                                                                    <a href="index.html#" class="modal-view detail-link quickview" data-toggle="modal" data-target="#productModal">Quick View</a>
-                                                                    <div class="ratings">
-                                                                        <ul>
-                                                                            <li>
-                                                                                <div class="star">
-                                                                                    <span class="yes"><i class="fa fa-star-o"></i></span>
-                                                                                    <span class="yes"><i class="fa fa-star-o"></i></span>
-                                                                                    <span class="yes"><i class="fa fa-star-o"></i></span>
-                                                                                    <span class="yes"><i class="fa fa-star-o"></i></span>
-                                                                                    <span><i class="fa fa-star-o"></i></span>
-                                                                                </div>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="price-box">
-                                                                        <p class="special-price"><span class="price">£70.00</span></p>
-                                                                        <p class="old-price"> <span class="price"><del>£80.00</del></span></p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!--/ Single product hover view-->
-                                                </div>
-                                                <div class="pro-action">
-                                                    <div class="product-cart-area-list">
-                                                        <div class="cart-btn btn-add-to-cart"><a href="index.html#"><i class="fa fa-shopping-cart"></i>ADD TO CART
-                                                        </a></div>
-                                                        <div class="cart-btn right link-compare"><a href="index.html#" data-toggle="tooltip" data-placement="top" title="Add To Wishlist" ><i class="fa fa-heart-o"></i>
-                                                        </a></div>
-                                                        <div class="cart-btn right link-wishlist"><a href="index.html#" data-toggle="tooltip" data-placement="top" title="Add To Compare"><i class="fa fa-retweet"></i>
-                                                        </a></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-title">
-                                                <a href="index.html#">Aenean eu tristique</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single item end -->
-                            </div>
-                            <!-- single group end -->
-                            <!-- single group start -->
-                            <div class="product-group">
-                                <!-- single item start -->
-                                <div class="row">
-                                    <div class="col-md-3 col-sm-6">
-                                        <div class="single-item">
-                                            <div class="s-product-img">
-                                                <!-- sale - new  -->
-                                                <div class="sticker-icon">
-                                                    <span class="sticker-bg"></span>
-                                                    <span class="sale sticker-text">sale</span>
-                                                </div>
-                                                <!--/ sale - new -->
-                                                <a href="index.html#">
-                                                    <img alt="" src="img/product/43.jpg" class="primary-image">
-                                                    <img alt="" src="img/product/7.jpg" class="secondary-image">
-                                                </a>
-                                                <div class="price-rate">
-                                                    <!-- Single product hover view-->
-                                                    <div class="global-table">
-                                                        <div class="global-row">
-                                                            <div class="global-cell">
-                                                                <div class="hover-view-content">
-                                                                    <a href="index.html#" class="modal-view detail-link quickview" data-toggle="modal" data-target="#productModal">Quick View</a>
-                                                                    <div class="ratings">
-                                                                        <ul>
-                                                                            <li>
-                                                                                <div class="star">
-                                                                                    <span class="yes"><i class="fa fa-star-o"></i></span>
-                                                                                    <span class="yes"><i class="fa fa-star-o"></i></span>
-                                                                                    <span class="yes"><i class="fa fa-star-o"></i></span>
-                                                                                    <span class="yes"><i class="fa fa-star-o"></i></span>
-                                                                                    <span><i class="fa fa-star-o"></i></span>
-                                                                                </div>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="price-box">
-                                                                        <p class="special-price"><span class="price">£70.00</span></p>
-                                                                        <p class="old-price"> <span class="price"><del>£80.00</del></span></p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!--/ Single product hover view-->
-                                                </div>
-                                                <div class="pro-action">
-                                                    <div class="product-cart-area-list">
-                                                        <div class="cart-btn btn-add-to-cart"><a href="index.html#"><i class="fa fa-shopping-cart"></i>ADD TO CART
-                                                        </a></div>
-                                                        <div class="cart-btn right link-compare"><a href="index.html#" data-toggle="tooltip" data-placement="top" title="Add To Wishlist" ><i class="fa fa-heart-o"></i>
-                                                        </a></div>
-                                                        <div class="cart-btn right link-wishlist"><a href="index.html#" data-toggle="tooltip" data-placement="top" title="Add To Compare"><i class="fa fa-retweet"></i>
-                                                        </a></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-title">
-                                                <a href="index.html#">Aenean eu tristique</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single item end -->
-                            </div>
-                            <!-- single group end -->
+							<?php
+                                $id = 4;
+                                $sql = "SELECT * FROM `Product` WHERE ProductId > " . $id*1000 . " and ProductId < ". ($id + 1)*1000 . " LIMIT 5";
+							$result = $conn->query($sql);
+							if ($result->num_rows > 0) {
+							// output data of each row
+							while($row = $result->fetch_assoc()) {
+							$productId = $row["ProductId"];
+							$productTag = $row["ProductTag"];
+							$productName = $row["ProductName"];
+							$productPrice = $row["ProductPrice"];
+							$productDesc = $row["ProductDesc"];
+							$MRP = (int)$productPrice + 2;
+							echo '<!-- single group start -->
+							<div class="product-group">
+								<!-- single item start -->
+								<div class="row">
+									<div class="col-md-3 col-sm-6">
+										<div class="single-item">
+											<div class="s-product-img">
+												<!-- sale - new  -->
+												<div class="sticker-icon">
+													<span class="sticker-bg"></span>
+													<span class="sale sticker-text">sale</span>
+												</div>
+												<!--/ sale - new -->
+												<a href="index.html#">
+													<img alt="" src="img/product/' . $productId . '.jpg" class="primary-image">
+												</a>
+												<div class="price-rate">
+													<!-- Single product hover view-->
+													<div class="global-table">
+														<div class="global-row">
+															<div class="global-cell">
+																<div class="hover-view-content">
+																	<a href="index.html#" class="modal-view detail-link quickview" data-toggle="modal" data-target="#productModal">Quick View</a>
+																	<div class="ratings">
+																		<ul>
+																			<li>
+																				<div class="star">
+																					<span class="yes"><i class="fa fa-star-o"></i></span>
+																					<span class="yes"><i class="fa fa-star-o"></i></span>
+																					<span class="yes"><i class="fa fa-star-o"></i></span>
+																					<span class="yes"><i class="fa fa-star-o"></i></span>
+																					<span><i class="fa fa-star-o"></i></span>
+																				</div>
+																			</li>
+																		</ul>
+																	</div>
+																	<div class="price-box">
+																		<p class="special-price"><span class="price">£' . $productPrice . '</span></p>
+																		<p class="old-price"> <span class="price"><del>£' . $MRP . '</del></span></p>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<!--/ Single product hover view-->
+												</div>
+												<div class="pro-action">
+													<div class="product-cart-area-list">
+														<div class="cart-btn btn-add-to-cart"><a href="index.html#"><i class="fa fa-shopping-cart"></i>ADD TO CART
+														</a></div>
+														<div class="cart-btn right link-compare"><a href="index.html#" data-toggle="tooltip" data-placement="top"
+																									title="Add To Wishlist"><i class="fa fa-heart-o"></i>
+														</a></div>
+														<div class="cart-btn right link-wishlist"><a href="index.html#" data-toggle="tooltip" data-placement="top"
+																									 title="Add To Compare"><i class="fa fa-retweet"></i>
+														</a></div>
+													</div>
+												</div>
+											</div>
+											<div class="product-title">
+												<a href="index.html#">' . $productName . '</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- single item end -->
+							</div>';
+							}
+							}
+							?>
                         </div>
                     </div>
                     <!--/ CLOTHINGS item End -->
@@ -1794,7 +1587,7 @@
 							</nav>
 						</div>
 					</div>
-					<div class="copyright-info"> Copyright &copy; 2017 <a href="http://lvivek.com/">Lakshmanan Vivek </a> All Rights Reserved </div>
+					<div class="copyright-info"> Copyright &copy; 2017 <a href="http://lvivek.com/">Spartan Deals </a> All Rights Reserved </div>
 				</div>
 			</div>
 		</div>
@@ -1844,5 +1637,7 @@
 <!-- main JS
 		============================================ -->
 <script src="js/main.js"></script>
+
+
 </body>
 </html>

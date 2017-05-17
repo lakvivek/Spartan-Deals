@@ -22,12 +22,15 @@ if(isset($getId)) {
     } else if($getId == 4) {
         $content = get_data('http://renup.org/product_marketplace.php');
     } else if($getId == 5) {
-        $content = get_data('http://smitha.smithavenkatesh.com/prod_market_place.php');
+        $content = get_data('http://smithavenkatesh.com/product_marketplace.php');
     } else if($getId == 6) {
         $content = get_data('http://www.lvivek.com/prod_market_place.php');
     }
 }
 $rows = json_decode($content, true);
+
+
+
 ?>
 
 
@@ -357,7 +360,7 @@ $rows = json_decode($content, true);
                                         echo '<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                                         <div class="single-item">
                                             <div class="s-product-img">
-                                                <a href="shop-category.html#">
+                                                <a href="product.html?pid='.$productId .'">
                                                     <img alt="" src="img/product/' .  $productId . '.jpg" class="primary-image">
                                                 </a>
                                                 <div class="price-rate">
@@ -401,14 +404,12 @@ $rows = json_decode($content, true);
                                                 </div>
                                             </div>
                                             <div class="product-title">
-                                                <a href="shop-category.html#">' . $productName . '</a>
+                                                <a href="product.html?pid='.$productId .'">' . $productName . '</a>
                                             </div>
                                         </div>
                                     </div>';
                                         }
-
                                         ?>
-
                                     </div>
                                 </div>
                             </div>
