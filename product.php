@@ -3,7 +3,6 @@ if (!isset($_GET['pid'])) {
     die();
 }
 
-<<<<<<< HEAD
 
 $getId = $_GET['pid'];
 $id = $getId[0];

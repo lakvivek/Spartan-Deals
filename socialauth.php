@@ -1,10 +1,5 @@
 <?php
 session_start();
-$servername = "iamvivek.ipagemysql.com";
-$username = "vivek";
-$password = "vivek123";
-$dbname = "marketplace";
-
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {

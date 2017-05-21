@@ -1,9 +1,5 @@
 <?php
 $getId = $_GET['uid'];
-$servername = "iamvivek.ipagemysql.com";
-$username = "vivek";
-$password = "vivek123";
-$dbname = "marketplace";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

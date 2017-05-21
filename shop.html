@@ -1,10 +1,6 @@
 <?php
 session_start();
 
-$servername = "iamvivek.ipagemysql.com";
-$username = "vivek";
-$password = "vivek123";
-$dbname = "marketplace";
 
 $conn =mysql_connect($servername, $username, $password);
    
