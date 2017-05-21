@@ -1,0 +1,280 @@
+.facebook-reaction{
+  max-width:100%;
+  margin:150px auto;
+  padding:0 60px;
+  position: relative;
+}
+
+.like-btn {
+  font-weight: bold;
+  color: #7f7f7f;
+  position: relative;
+  cursor: pointer;
+  padding: 20px 20px 0 0;
+}
+
+.like-btn:hover {
+  text-decoration: underline;
+}
+
+.like-btn-default {
+  background-image: url('../images/facebook.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: -277px -446px;
+}
+
+.like-btn-emo {
+  display: inline-block;
+  margin: 0 6px -3px 0;
+  width: 16px;
+  height: 16px;
+}
+
+.reactions-box {
+  height: 44px;
+  width: 340px;
+  padding: 10px;
+  position: absolute;
+  top: -63px;
+  left: -14px;
+  box-shadow: 1px 1px 2px #cccccc, -1px 0px 2px #eeeeee;
+  border-radius: 44px 44px;
+  display: none;
+}
+
+.reaction {
+  list-style-type: none;
+  cursor: pointer;
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  top: 8px;
+  opacity: 0;
+  transform: scale(1, 1);
+  transition: opacity .5s ease-in-out 1s, transform .07s ease-in-out 0s, top .07s ease-in-out 0s;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center
+}
+
+.like-btn:hover .reactions-box {
+  display: block;
+}
+
+.reaction-like {
+  left: 10px;
+  transition-delay: 0s;
+  background-image: url('../images/reactions_like.png');
+}
+
+.reaction-love {
+  left: 68px;
+  transition-delay: .05s;
+  background-image: url('../images/reactions_love.png');
+}
+
+.reaction-haha {
+  left: 126px;
+  transition-delay: .1s;
+  background-image: url('../images/reactions_haha.png');
+}
+
+.reaction-wow {
+  left: 184px;
+  transition-delay: .15s;
+  background-image: url('../images/reactions_wow.png');
+}
+
+.reaction-sad {
+  left: 242px;
+  transition-delay: .2s;
+  background-image: url('../images/reactions_sad.png');
+}
+
+.reaction-angry {
+  left: 300px;
+  transition-delay: .25s;
+  background-image: url('../images/reactions_angry.png');
+}
+
+
+
+.like-btn:hover .reaction {
+  opacity: 1;
+  animation-name: reaction_delay;
+  animation-duration: .5s;
+}
+
+@keyframes reaction_delay {
+  0% {
+    width: 48px;
+    height: 48px;
+    top: 60px;
+  }
+  48% {
+    width: 56px;
+    height: 56px;
+    top: 5px;
+  }	
+  100% {
+    width: 48px;
+    height: 48px;
+    top: 8px;
+  }
+}
+
+
+.like-btn:hover .reaction-like {
+  animation-delay: 0s
+}
+
+.like-btn:hover .reaction-love {
+  animation-delay: .05s
+}
+
+.like-btn:hover .reaction-haha {
+  animation-delay: .1s
+}
+
+.like-btn:hover .reaction-wow {
+  animation-delay: .15s
+}
+
+.like-btn:hover .reaction-sad {
+  animation-delay: .2s
+}
+
+.like-btn:hover .reaction-angry {
+  animation-delay: .25s
+}
+
+.reaction:hover {
+  transform: scale(1.3, 1.3);
+  top: 2px
+}
+
+
+
+.reaction::before {
+  display: inline-block;
+  color: #ffffff;
+  text-align: center;
+  line-height: 17px;
+  font-size: .7em;
+  width: 80%;
+  height: 17px;
+  margin-left: 10%;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 20px;
+  position: absolute;
+  top: -25px;
+  opacity: 0;
+  transition: opacity .2s ease-in-out 0s;
+}
+
+.reaction:hover::before {
+  opacity: 1
+}
+
+.reaction-like::before {
+  content: 'Like'
+}
+
+.reaction-love::before {
+  content: 'Love'
+}
+
+.reaction-haha::before {
+  content: 'Haha'
+}
+
+.reaction-wow::before {
+  content: 'Wow'
+}
+
+
+.reaction-sad::before {
+  content: 'Sad'
+}
+
+.reaction-angry::before {
+  content: 'Angry'
+}
+
+.like-stat {
+  margin-top: 10px;
+}
+
+
+.like-btn-like{
+  background-image: url('../images/reaction-small.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: -17px -151px;
+}
+
+.like-btn-love{
+  background-image: url('../images/reaction-small.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: 0 -168px;
+}
+
+.like-btn-haha{
+  background-image: url('../images/reaction-small.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: 0 -151px;
+}
+
+.like-btn-wow{
+  background-image: url('../images/reaction-small.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: -17px -185px;
+}
+
+.like-btn-sad{
+  background-image: url('../images/reaction-small.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: -17px -168px;
+}
+
+.like-btn-angry{
+  background-image: url('../images/reaction-small.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: -17px -117px;
+}
+
+.like-btn-text-like {
+  color:rgb(88, 144, 255);
+}
+.like-btn-text-wow,.like-btn-text-haha,.like-btn-text-sad {
+  color:rgb(240, 186, 21)
+}
+.like-btn-text-love{
+  color:rgb(242, 82, 104)
+}
+.like-btn-text-angry{
+  color:rgb(247, 113, 75);
+}
+
+.like-emo > span{
+    display: inline-block;
+    margin: 0 -3px -3px 0px;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #EEE;
+    border-radius: 50%;
+
+}
+
+.like-details{
+  margin-left:10px;
+  color:#9197a3;
+  font-size:12px;
+}

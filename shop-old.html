@@ -73,32 +73,35 @@ if(isset($add_to_cart_productId))
                  unset($_SESSION["cart_products"][$new_product['ProductId']]); //unset old array item
              }           
         }
-        $_SESSION["cart_products"][$new_product['ProductId']] = $new_product; //update or create product session with new item
-        echo '<script>alert("You have successfully added to the cart."); </script>';
+        $_SESSION["cart_products"][$new_product['ProductId']] = $new_product; //update or create product session with new item  
+        print_r($_SESSION["cart_products"]);
     }
 }
 }
 
-if(isset($_POST['priceLowHigh']))
+if(isset($_POST['sortOption'])){
+        $selectOption = $_POST['sortOption'];
+        if ($selectOption == "priceLowHigh")
         {                                                                                                                                                                           
             usort($rows, function($a, $b) {
                 return $a["ProductPrice"] < $b["ProductPrice"] ? -1 : 1;
             }); 
-        }elseif (isset($_POST['priceHighLow']))
+        }elseif ($selectOption == "priceHighLow")
         {                                                                                                                                                                           
             usort($rows, function($a, $b) {
                 return $a["ProductPrice"] > $b["ProductPrice"] ? -1 : 1;
             }); 
-        }elseif (isset($_POST['tagAsc']))
+        }elseif ($selectOption == "tagAsc")
         {                                                                                                                                                                           
             usort($rows, function($a, $b) {
                 return $a["ProductTag"] < $b["ProductTag"] ? -1 : 1;
             }); 
-        }elseif (isset($_POST['tagDesc']))
+        }elseif ($selectOption == "tagDesc")
         {                                                                                                                                                                           
             usort($rows, function($a, $b) {
                 return $a["ProductTag"] > $b["ProductTag"] ? -1 : 1;
             }); 
+        }
         }
 # Add to Wishlist:
 if(isset($_POST['Add_to_Wishlist']))
@@ -109,7 +112,7 @@ $add_to_wishlist_productId = $_POST['Add_to_Wishlist'];
 $add_to_wishlist_userId = $_SESSION['session_id'];
 $sql = "INSERT INTO `Wishlist`". "(ProductId,UserId)". "VALUES('$add_to_wishlist_productId','$add_to_wishlist_userId')";
 $results = mysql_query( $sql, $conn );
-    echo '<script>alert("Added to the wishlist successfully."); </script>';
+echo $results;
 if(! $results ) {
       die('Could not enter data: ' . mysql_error());
         }
@@ -122,90 +125,29 @@ if(! $results ) {
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Spartan Deals</title>
+    <title>Shop Category Page | Assyrian</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="google-signin-client_id"
-          content="199118433992-ln3nj31q0u10h01egspqdccit655jhhb.apps.googleusercontent.com">
-    <link rel="stylesheet" href="css/custom.css">
-    <link rel="stylesheet" href="css/register.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,800,400italic,600' rel='stylesheet'
-          type='text/css'>
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,800,400italic,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/jquery-ui.css">
-    <link rel="stylesheet" href="css/social-likes_classic.css">
-    <link rel="stylesheet" href="css/venobox.css">
     <link rel="stylesheet" href="css/owl.carousel.css">
     <link rel="stylesheet" href="css/owl.theme.css">
     <link rel="stylesheet" href="css/owl.transitions.css">
-    <link rel="stylesheet" href="lib/css/nivo-slider.css" type="text/css"/>
-    <link rel="stylesheet" href="lib/css/preview.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="lib/css/nivo-slider.css" type="text/css" />
+    <link rel="stylesheet" href="lib/css/preview.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/venobox.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
     <link rel="stylesheet" href="css/meanmenu.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/responsive.css">
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-
-    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet"
-          type="text/css"/>
-    <script type="text/javascript">
-        (function () {
-            var po = document.createElement('script');
-            po.type = 'text/javascript';
-            po.async = true;
-            po.src = 'https://plus.google.com/js/client:plusone.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(po, s);
-        })();
-    </script>
-    <script>
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId      : '1689593654679841',
-                cookie     : true,
-                xfbml      : true,
-                version    : 'v2.8'
-            });
-            FB.AppEvents.logPageView();
-        };
-
-        (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
-    <script>
-        function myFunction() {
-            var input, filter, ul, li, a, i;
-            input = document.getElementById("myInput");
-            filter = input.value.toUpperCase();
-            ul = document.getElementById("myUL");
-            li = ul.getElementsByTagName("li");
-            for (i = 0; i < li.length; i++) {
-                a = li[i].getElementsByTagName("a")[0];
-                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                    li[i].style.display = "";
-                } else {
-                    li[i].style.display = "none";
-                }
-            }
-            if (input.value == '') {
-                ul.style.display = 'none';
-            } else {
-                ul.style.display = 'inline-block';
-            }
-
-        }
-    </script>
 </head>
 <body>
 <!--[if lt IE 8]>
@@ -218,7 +160,7 @@ if(! $results ) {
                 <div class="topbar-content">
                     <div class="header-email widget">
                         <i class="fa fa-envelope"></i><strong>Email:</strong> <a
-                            href="mailto:viveklakshmanan@live.com ">spartandeals6@gmail.com </a>
+                            href="mailto:viveklakshmanan@live.com ">spartan-deals@live.com </a>
                     </div>
                     <div class="header-phone widget"><i class="fa  fa-phone"></i><strong>Phone:</strong><a
                             href="tel:+16692924707"> (669) 272-4707</a></div>
@@ -227,7 +169,7 @@ if(! $results ) {
                             <ul class="nav_menu" id="menu-top-menu">
                                 <?php
                                 if(isset($_SESSION['session_user'])) {
-                                    echo '<li class="menu-item  first"><a href="my-account.html?uid=' . $_SESSION['session_id'] . '">My Account</a></li>
+                                    echo '<li class="menu-item  first"><a href="my-account.html">My Account</a></li>
                                 <li class="menu-item"><a href="wishlist.php">My Wishlist</a></li>
                                 <li class="menu-item"><a href="shopping-cart.php">Shopping Cart</a></li>
                                 <li class="menu-item"><a href="checkout.php">Checkout</a></li>
@@ -291,21 +233,21 @@ if(! $results ) {
                                                                     </a>
                                                                 </li>
                                                                 <li class="menu-item">
-                                                                    <a class="item_link" href="tracker.php?id=4">
+                                                                    <a class="item_link" href="#">
 															<span class="link_content">
 																<span class="link_text">Tracker</span>
 															</span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="menu-item">
-                                                                    <a class="item_link" href="about.html">
+                                                                    <a class="item_link" href="#">
 															<span class="link_content">
 																<span class="link_text">About</span>
 															</span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="menu-item">
-                                                                    <a class="item_link" href="contact.html">
+                                                                    <a class="item_link" href="#">
 															<span class="link_content">
 																<span class="link_text">Contact Us</span>
 															</span>
@@ -386,30 +328,78 @@ if(! $results ) {
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                     <aside class="widget shop-filter fix">
+                        <h3 class="sidebar-title">Filter By Price</h3>
+                        <div class="info_widget">
+                            <div class="price_filter">
+                                <div id="slider-range"></div>
+                                <div class="price_slider_amount">
+                                    <input type="text" id="amount" name="price"  placeholder="Add Your Price" />
+                                    <input type="submit"  value="Filter"/>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                    <aside class="widget shop-filter fix">
                         <h3 class="sidebar-title">Sort</h3>
                         <div class="info_widget">
                             <div class="price_filter">
+                                <div id="slider-range"></div>
                                 <div class="sidebar-menu">
                                     <form method="post">
-                                          <input style="width: 180px; margin-bottom: 10px;" type="submit"  value="Price :Low to High" name="priceLowHigh" / ><br>
-                                          <input style="width: 180px; margin-bottom: 10px;" type="submit"  value="Price :High to Low" name ="priceHighLow"/><br>
-                                          <input type="submit" style="width: 180px; margin-bottom: 10px;" value="Tag :Ascending" name ="tagAsc"/><br>
-                                          <input type="submit" style="width: 180px; margin-bottom: 10px;"  value="Tag :Descending" name = "tagDesc"/><br>
+                                    <select name="sortOption">
+                                          <option value=" ">  </option>
+                                          <option value="priceLowHigh">Price :Low to High</option>
+                                          <option value="priceHighLow">Price :High to Low</option>
+                                          <option value="tagAsc">Tag :Ascending</option>
+                                          <option value="tagDesc">Tag :Descending</option>
+                                    </select>  
+                                    <input type="submit"  value="Sort"/>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </aside>
+                    <aside class="widget widget-categories">
+                        <h3 class="sidebar-title">Categories</h3>
+                        <ul class="sidebar-menu">
+                            <li><a href="shop-category.php#">Accessories</a> <span class="count">(14)</span></li>
+                            <li><a href="shop-category.php#">Bags</a> <span class="count">(9)</span></li>
+                            <li><a href="shop-category.php#">Clothings</a> <span class="count">(7)</span></li>
+                            <li><a href="shop-category.php#">Shoes</a> <span class="count">(2)</span></li>
+                        </ul>
+                    </aside>
                     <aside class="widget filter-by">
                         <h3 class="sidebar-title">Filter by</h3>
                         <ul class="sidebar-menu">
-                            <li><a href="shop.html?id=4">Cold Stone</a></li>
-                            <li><a href="shop.html?id=6">Fashionista</a></li>
-                            <li><a href="shop.html?id=5">Home Decors</a></li>
-                            <li><a href="shop.html?id=3">Ice Modders</a></li>
-                            <li><a href="shop.html?id=2">Kadart</a></li>
-                            <li><a href="shop.html?id=1">MTV Connect</a></li>
+                            <li><a href="shop-category.php#">L</a> <span class="count">(1)</span></li>
+                            <li><a href="shop-category.php#">M</a> <span class="count">(1)</span></li>
+                            <li><a href="shop-category.php#">S</a> <span class="count">(1)</span></li>
+                            <li><a href="shop-category.php#">XL</a> <span class="count">(1)</span></li>
                         </ul>
+                    </aside>
+                    <aside class="widget compare">
+                        <h3 class="sidebar-title">Compare</h3>
+                        <ul class="sidebar-menu compare-products-list">
+                            <li><a href="shop-category.php#">Aliquam lobortis est</a> <span class="product-remove"><a href="shop-category.php#" title="Remove"><i class="fa fa-times"></i></a></span></li>
+                            <li><a href="shop-category.php#">Rubina lobortis Mos</a> <span class="product-remove"><a href="shop-category.php#" title="Remove"><i class="fa fa-times"></i></a></span></li>
+                        </ul>
+                        <a class="clear-all"  href="shop-category.php#">Clear all</a>
+                        <a class="compare button"  href="shop-category.php#">Compare</a>
+                    </aside>
+                    <aside class="widget tagcloud-list">
+                        <h3 class="sidebar-title">Popular Tags</h3>
+                        <div class="sidebar-menu tagcloud">
+                            <a href="shop-category.php#">camera</a>
+                            <a href="shop-category.php#">clothes</a>
+                            <a href="shop-category.php#">electronic</a>
+                            <a href="shop-category.php#">fashion</a>
+                            <a href="shop-category.php#">handbag</a>
+                            <a href="shop-category.php#">hat</a>
+                            <a href="shop-category.php#">laptop</a>
+                            <a href="shop-category.php#">phone</a>
+                            <a href="shop-category.php#">tablet</a>
+                            <a href="shop-category.php#">television</a>
+                        </div>
                     </aside>
                 </div>
                 <div class="col-md-9 fix">
@@ -464,9 +454,10 @@ if(! $results ) {
                                                 </div>
                                                 <div class="pro-action">
                                                     <div class="product-cart-area-list">
-														<div class="cart-btn btn-add-to-cart"><button type="submit" name="Add_to_Cart" value="' . $productId .'"><i class="fa fa-shopping-cart"></i>ADD TO CART
-														</button></div>
-                                                        <div class="cart-btn right link-compare"><button type="submit" name="Add_to_Wishlist" value="' . $productId .'"><i class="fa fa-heart-o"></i></button></div>
+														<div class="cart-btn btn-add-to-cart"><a href="#"><button type="submit" name="Add_to_Cart" value="' . $productId .'"><i class="fa fa-shopping-cart"></i>ADD TO CART
+														</button></a></div>
+														<div class="cart-btn right link-compare"><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Wishlist" ><button type="submit" name="Add_to_Wishlist" value="' . $productId .'"><i class="fa fa-heart-o"></i>
+                                                        </a></div>
 
                                                     </div>
                                                 </div>
@@ -553,6 +544,7 @@ if(! $results ) {
                                 <span class="old-price">$'. $MRP . '</span>
                             </div>
                         </div>
+                        <a href="#" class="see-all">See all features</a>
                         <div class="quick-add-to-cart">
 							<form class="cart" action="shop.html?id=' . $getId .'" method="post">
                                 <div class="numbers-row">
@@ -575,204 +567,6 @@ if(! $results ) {
 </div>';
     }
     ?>
-</div>
-
-<div id="login-modal" class="modal fade login" aria-labelledby="myModalLabel" tabindex="-1" role="dialog">
-    <div class="modal-dialog login animated">
-        <form id="login-form" action="index.html" method="POST">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" onClick="window.location.reload()" data-dismiss="modal"
-                            aria-hidden="true">&times;
-                    </button>
-                    <h4 class="modal-title">Login with</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="box">
-                        <div class="content">
-                            <div>
-                                <fb:login-button scope="public_profile,email" onlogin="fbLogin();">
-                                </fb:login-button>
-
-                            </div>
-                            <hr style="clear:both;">
-
-
-                            <div class="g-signin2"  data-onsuccess="onSignIn">
-                            </div>
-
-                            <div class="division">
-                                <div class="line l"></div>
-                                <span>or</span>
-                                <div class="line r"></div>
-                            </div>
-
-                            <script type="text/javascript">
-                                function onSignIn(googleUser) {
-                                    var profile = googleUser.getBasicProfile();
-
-                                    var data = [];
-                                    data.push(profile.getName());
-                                    data.push(profile.getEmail());
-
-                                    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-                                    console.log('Name: ' + profile.getName());
-                                    console.log('Image URL: ' + profile.getImageUrl());
-                                    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-                                    console.log(profile);
-                                    closeModal();
-
-                                }
-
-                                function closeModal() {
-                                    // <?php
-                                    // $_SESSION['session_user'] = "google";
-                                    // $_SESSION['session_id'] = "google";
-                                    // ?>
-                                    signOut();
-                                    window.location.reload();
-                                }
-
-                                function signOut() {
-                                    var auth2 = gapi.auth2.getAuthInstance();
-                                    auth2.signOut().then(function () {
-                                        console.log('User signed out.');
-                                    });
-                                }
-
-                                function fbLogin() {
-                                    FB.login(function (response) {
-                                        if (response.status === 'connected') {
-                                            console.log("connected");
-                                            // Logged into your app and Facebook.
-                                            FB.api('/me', {
-                                                fields: 'email,first_name,last_name'
-                                            }, function (response) {
-                                                $.post('socialauth.php', {
-                                                    email: response.email,
-                                                    firstName: response.first_name,
-                                                    lastName: response.last_name
-                                                }).done(function (data) {
-                                                    window.location.reload();
-                                                });
-                                            });
-                                        } else {
-                                            // The person is not logged into this app or we are unable to tell.
-                                            console.log("failed");
-                                        }
-                                    }, {
-                                        scope: 'public_profile,email'
-                                    });
-                                }
-
-                            </script>
-
-                            <h2>Login Account </h2>
-                            <div id="err-msg"></div>
-
-                            <div class="form-group">
-                                <input type="text" id="email" name="email" placeholder="email"
-                                       class="form-control input-lg"/>
-                            </div>
-                            <div class="form-group">
-                                <input type="password" id="password" name="password" placeholder="Password"
-                                       class="form-control input-lg"/>
-                            </div>
-                            <div class="form-group">
-                                <div id="captcha"></div>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" id="login" name="login" value="login"
-                                       class="btn btn-primary btn-block btn-lg"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        Don't have an account? <a href="#sign-modal" data-dismiss="modal" data-toggle="modal">Register
-                        Here</a>
-                    </div>
-                </div>
-        </form>
-    </div>
-
-</div>
-</div>
-
-<div id="sign-modal" class="modal fade login" aria-labelledby="myModalLabel" tabindex="-1" role="dialog">
-    <div class="modal-dialog login animated">
-        <form id="sign-form" action="index.html" method="POST">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" onClick="window.location.reload()" data-dismiss="modal"
-                            aria-hidden="true">&times;
-                    </button>
-                    <h4 class="modal-title">Register with</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="box">
-                        <div class="content">
-                            <div>
-                                <fb:login-button scope="public_profile,email" onlogin="fbLogin();">
-                                </fb:login-button>
-
-                            </div>
-                            <hr style="clear:both;">
-
-
-                            <div class="g-signin2" data-onsuccess="onSignIn">
-                            </div>
-
-                            <div class="division">
-                                <div class="line l"></div>
-                                <span>or</span>
-                                <div class="line r"></div>
-                            </div>
-
-
-                            <h2>Sign Up to Create Account </h2>
-                            <div id="err-msg"></div>
-
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" name="name" placeholder="Enter Full Name" required
-                                       value="<?php if($error) echo $name; ?>" class="form-control"/>
-                                <span class="text-danger"><?php if (isset($name_error)) echo $name_error; ?></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Email</label>
-                                <input type="text" name="email" placeholder="Email" required
-                                       value="<?php if($error) echo $email; ?>" class="form-control"/>
-                                <span class="text-danger"><?php if (isset($email_error)) echo $email_error; ?></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Password</label>
-                                <input type="password" name="password" placeholder="Password" required
-                                       class="form-control"/>
-                                <span class="text-danger"><?php if (isset($password_error)) echo $password_error; ?></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Confirm Password</label>
-                                <input type="password" name="cpassword" placeholder="Confirm Password" required
-                                       class="form-control"/>
-                                <span class="text-danger"><?php if (isset($cpassword_error)) echo $cpassword_error; ?></span>
-                            </div>
-                            <div class="form-group">
-                                <div id="captcha"></div>
-                            </div>
-
-                            <div class="form-group">
-                                <input type="submit" name="signup" class="btn btn-primary " value="signup">
-                                </input>
-
-                            </div>
-                        </div>
-        </form>
-        <div class="modal-footer">
-            <div class="col-md-4 col-md-offset-4 text-center">
-                Already Registered? <a href="#login-modal" data-dismiss="modal" data-toggle="modal">Login Here</a>
-            </div>
-        </div>
-    </div>
 </div>
 
 <script src="js/vendor/jquery-1.11.3.min.js"></script>

@@ -6935,3 +6935,14 @@ h3.widget-title-modal {
 	height: 150px; !important;
 	width: 100%; !important;
 }
+.rating-red {
+	color:red;
+}
+
+.rating-big {
+	font-size: 20px;
+}
+
+.myacc {
+	font-size:30px;
+}

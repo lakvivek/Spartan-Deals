@@ -1,140 +1,616 @@
+<?php
+session_start();
+
+?>
 <!doctype html>
 <html class="no-js" lang="">
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-<meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Fashionista</title>
-<meta name="description" content="">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
-<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,800,400italic,600' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/font-awesome.min.css">
-<link rel="stylesheet" href="lib/css/nivo-slider.css" type="text/css" />
-<link rel="stylesheet" href="lib/css/preview.css" type="text/css" media="screen" />
-<link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="css/animate.css">
-<link rel="stylesheet" href="css/responsive.css">
-<script src="js/vendor/modernizr-2.8.3.min.js"></script>
-</head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Spartan Deals</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-signin-client_id"
+          content="199118433992-ln3nj31q0u10h01egspqdccit655jhhb.apps.googleusercontent.com">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,800,400italic,600' rel='stylesheet'
+          type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/social-likes_classic.css">
+    <link rel="stylesheet" href="css/venobox.css">
+    <link rel="stylesheet" href="css/owl.carousel.css">
+    <link rel="stylesheet" href="css/owl.theme.css">
+    <link rel="stylesheet" href="css/owl.transitions.css">
+    <link rel="stylesheet" href="lib/css/nivo-slider.css" type="text/css"/>
+    <link rel="stylesheet" href="lib/css/preview.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/meanmenu.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 
-<body class="home">
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet"
+          type="text/css"/>
+    <script type="text/javascript">
+        (function () {
+            var po = document.createElement('script');
+            po.type = 'text/javascript';
+            po.async = true;
+            po.src = 'https://plus.google.com/js/client:plusone.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(po, s);
+        })();
+    </script>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '1689593654679841',
+                cookie     : true,
+                xfbml      : true,
+                version    : 'v2.8'
+            });
+            FB.AppEvents.logPageView();
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <script>
+        function myFunction() {
+            var input, filter, ul, li, a, i;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("myUL");
+            li = ul.getElementsByTagName("li");
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("a")[0];
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+            if (input.value == '') {
+                ul.style.display = 'none';
+            } else {
+                ul.style.display = 'inline-block';
+            }
+
+        }
+    </script>
+</head>
+<body>
 <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]--> 
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
 <!-- Add your site or application content here -->
 <header>
-  <div class="header-container">
-    <div class="header">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-            <div class="global-table">
-              <div class="global-row">
-                <div class="global-cell">
-                  <div class="logo"> <a href="index.html" title="Fashionista" ><img src="img/logo/logo-1.png" alt="logo image" ></a> </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-12 col-md-9 hidden-sm hidden-xs">
-            <div class="horizontal-menu">
-              <div class="global-table">
-                <div class="global-row">
-                  <div class="global-cell">
-                    <div class="visible-large">
-                      <div class="mega_main mega_main_menu" id="mega_main_menu_first">
-                        <div class="menu_holder">
-                          <div class="menu_inner">
-                            <nav>
-                              <ul class="mega_main_menu_ul" id="mega_main_menu_ul_first">
-                                <li class="menu-item"> <a class="item_link" href="index.html"> <span class="link_content"> <span class="link_text">Home</span> </span> </a> </li>
-                                <li class="menu-item megamenu_list"> <a class="item_link" href="shop.html"> <span class="link_content"> <span class="link_text">Shop</span> </span> </a> </li>
-                                <li class="menu-item active"> <a class="item_link" href="about.html"> <span class="link_content"> <span class="link_text">About</span> </span> </a> </li>
-                                <li class="menu-item"> <a class="item_link" href="news.html"> <span class="link_content"> <span class="link_text">News</span> </span> </a> </li>
-                                <li class="menu-item"> <a class="item_link" href="contact.html"> <span class="link_content"> <span class="link_text">Contact</span> </span> </a> </li>
-                                <li class="menu-item"> <a class="item_link" href="login.html"> <span class="link_content"> <span class="link_text">Login</span> </span> </a> </li>
-                                <li class="menu-item"> <a class="item_link" href="user.html"> <span class="link_content"> <span class="link_text">User</span> </span> </a> </li>
-                              </ul>
-                            </nav>
-                          </div>
-                        </div>
-                      </div>
+    <div class="header-container">
+        <div class="container">
+            <div class="top-bar">
+                <div class="topbar-content">
+                    <div class="header-email widget">
+                        <i class="fa fa-envelope"></i><strong>Email:</strong> <a
+                            href="mailto:viveklakshmanan@live.com ">spartandeals6@gmail.com </a>
                     </div>
-                  </div>
+                    <div class="header-phone widget"><i class="fa  fa-phone"></i><strong>Phone:</strong><a
+                            href="tel:+16692924707"> (669) 272-4707</a></div>
+                    <div class="top-menu widget">
+                        <div class="menu-top-menu-container">
+                            <ul class="nav_menu" id="menu-top-menu">
+                                <?php
+                                if(isset($_SESSION['session_user'])) {
+                                    echo '<li class="menu-item  first"><a href="my-account.html?uid=' . $_SESSION['session_id'] . '">My Account</a></li>
+                                <li class="menu-item"><a href="wishlist.php">My Wishlist</a></li>
+                                <li class="menu-item"><a href="shopping-cart.php">Shopping Cart</a></li>
+                                <li class="menu-item"><a href="checkout.php">Checkout</a></li>
+                                <li class="menu-item"><a href="logout.php">Logout</a></li>
+                                ';
+                                } else {
+                                echo '
+                                <li class="menu-item"><a href="#" data-toggle="modal" data-target="#sign-modal">Sign
+                                    up</a></li>
+                                <li class="menu-item"><a href="#" data-toggle="modal"
+                                                         data-target="#login-modal">Login</a></li>
+                                ';
+                                }
+
+                                ?>
+
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
+        </div>
+        <div class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <div class="global-table">
+                            <div class="global-row">
+                                <div class="global-cell">
+                                    <div class="logo">
+                                        <a href="index.html" title="Market-Place"><img src="img/logo/logo-1.png"
+                                                                                       alt="logo image"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-9 hidden-sm hidden-xs">
+                        <div class="horizontal-menu">
+                            <div class="global-table">
+                                <div class="global-row">
+                                    <div class="global-cell">
+                                        <div class="visible-large">
+                                            <div class="mega_main mega_main_menu" id="mega_main_menu_first">
+                                                <div class="menu_holder">
+                                                    <div class="menu_inner">
+                                                        <nav>
+                                                            <ul class="mega_main_menu_ul" id="mega_main_menu_ul_first">
+                                                                <li class="menu-item">
+                                                                    <a class="item_link" href="index.html">
+															<span class="link_content">
+																<span class="link_text">Home</span>
+															</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="menu-item">
+                                                                    <a class="item_link" href="shop.html?id=4">
+															<span class="link_content">
+																<span class="link_text">Shop</span>
+															</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="menu-item">
+                                                                    <a class="item_link" href="tracker.php?id=4">
+															<span class="link_content">
+																<span class="link_text">Tracker</span>
+															</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="menu-item active">
+                                                                    <a class="item_link" href="about.html">
+															<span class="link_content">
+																<span class="link_text">About</span>
+															</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="menu-item">
+                                                                    <a class="item_link" href="contact.html">
+															<span class="link_content">
+																<span class="link_text">Contact Us</span>
+															</span>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </nav>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 hidden-md hidden-lg">
+                        <div class='mobile-menu-area'>
+                            <nav id="mobile-menu">
+                                <ul>
+                                    <li><a href="index.html">Home</a>
+                                    </li>
+                                    <li><a href="shop.html?id=4">Shop</a>
+
+                                    </li>
+                                    <li><a href="#">Tracker</a>
+
+                                    </li>
+                                    <li><a href="#">About</a>
+
+                                    </li>
+                                    <li><a href="#">Contact Us</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!--/ Header -->
+<div class="clear"></div>
+<!-- main-container full-width -->
+<!--  HEADER-AREA END-->
+<div align="center" class="row">
+    <img  align="center" alt="about-us" src="img/about/spartandealsnew.JPG">
+</div>
+
+
+<!-- TEAM-AREA-START -->
+<div class="team-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="team-hedding">
+                    <h3>Spartan Deals</h3>
+                    <p><h4>to make you more creative, fashionable and tech savvy!!</h4></p>
+                </div>
+            </div>
         </div>
         <div class="row">
-          <div class="col-sm-12 hidden-md hidden-lg">
-            <div class='mobile-menu-area'>
-              <nav id="mobile-menu">
-                <ul>
-                  <li><a href="index.html">Home</a> </li>
-                  <li><a href="shop.html">Shop</a> </li>
-                  <li><a href="about.html">About</a>
-                  <li><a href="news.html">News</a> </li>
-                  <li><a href="contact.html">Contact</a> </li>
-                  <li><a href="login.html">Login</a> </li>
-                  <li><a href="user.html">User</a> </li>
-                </ul>
-              </nav>
+            <div class="team-member">
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="single-member">
+                        <div class="member-pic">
+                            <img src="img/product/4005.jpg" alt="">
+                        </div>
+                        <div class="member-info">
+                            <h4>Cold Stone Coffee</h4>
+                            <h5>Brings to you the best caffeine beverages & eateries!!</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="single-member">
+                        <div class="member-pic">
+                            <img src="img/product/6005.jpg" alt="">
+                        </div>
+                        <div class="member-info">
+                            <h4>Fashionista!</h4>
+                            <h5>Shop with them and get trendy!</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="single-member">
+                        <div class="member-pic">
+                            <img src="img/product/5005.jpg" alt="">
+                        </div>
+                        <div class="member-info">
+                            <h4>Home Decors</h4>
+                            <h5>Shop with the best interior designers in town!</h5>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="row">
+                <div class="team-member">
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <div class="single-member">
+                            <div class="member-pic">
+                                <img src="img/product/3005.jpg" alt="">
+                            </div>
+                            <div class="member-info">
+                                <h4>ICE MODDERS</h4>
+                                <h5>Get tech savvy with ice modders!!</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="single-member">
+                            <div class="member-pic">
+                                <img src="img/product/2006.jpg" alt="">
+                            </div>
+                            <div class="member-info">
+                                <h4>KadArt</h4>
+                                <h5>Give yourself a touch of art!</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="single-member">
+                            <div class="member-pic">
+                                <img src="img/product/1005.jpg" alt="">
+                            </div>
+                            <div class="member-info">
+                                <h4>Mtv Connect</h4>
+                                <h5>Check out what best can you gift your loved ones!</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
-      </div>
     </div>
-  </div>
-</header>
-<div class="clear"></div>
-<div class="main-container">
-  <div class="blog_header"> about </div>
 </div>
-<div class="row">
-<center>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="about">
-  <h1>This is Fashionista <br />
-    <span> YOUR ONE-STOP FASHION DESTINATION</span> </h1>
-  <div class="about-us">
-    <p> <span>Fashionista </span> is your free, daily shopping update for the clothing, shoes and accessories you love. Just tell us your favorite designers and brands, and we do the legwork, searching hundreds of online stores like Nordstrom, Neiman Marcus, J. Crew, Piperlime and Shopbop, to find your favorite items on sale in your size. We deliver your sales to you when and where you want: on the Web, in email or on your iPhone.Fashionista makes it convenient to get all the things you want on sale in your size. </p>
-    <p> <span>Services </span> Salemail, Fashionista's flagship product, is an email that alerts you when your favorite brands go on sale in your size. Not only do you get to choose all the brands you love and your personal sizes, but you can pick how frequently you receive these emails (we recommend twice a week!). You can also log onto our site at any time and see your latest sales and "heart" the styles you want to save for later. </p>
-    <p> <span>Technology </span> Though some people think of us as a fashion site, Fashionista is a robust platform that leverages leading-edge technology to monitor websites, categorize information and match you with items you care about.
-      We work hand-in-hand with more than 150 leading online retailers, have more than four million members and make more than two billion product recommendations each month. </p>
-    <p> <span>Press </span> Fashionista was recently cited by Time as one of the "50 Best Websites of 2012." We've also been called a site that "revolutionized shopping" (Lucky, December 2010) and one that is "changing the way we shop" (Mashable, 2010). Visit our Featured Press page for more. </p>
-  </div>
-  </center>
-</div>
+<!-- TEAM-AREA-END -->
+<!-- SERVICE-WORK-AREA-START -->
+
+<!-- ABOUT-SKILLS-AREA-END -->
+<!-- main-container full-width end -->
+
+<!-- Footer area-->
 <div class="footer">
-  <div class="footer-bottom">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-7 col-sm-12 col-xs-12 fix">
-          <div class="bottom_menu">
-            <div class="menu-customer-care-container">
-              <nav>
-                <ul class="nav_menu">
-                  <li class="menu-item"> <a href="index.html">Home</a> </li>
-                  <li class="menu-item"> <a href="shop.html">Shop </a> </li>
-                  <li class="menu-item"> <a href="about.html">About</a> </li>
-                  <li class="menu-item"> <a href="news.html">News</a> </li>
-                  <li class="menu-item"> <a href="contact.html">Contact</a> </li>
-                </ul>
-              </nav>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 col-sm-12 col-xs-12 fix">
+                    <div class="bottom_menu">
+                        <div class="menu-customer-care-container">
+                            <nav>
+                                <ul class="nav_menu">
+                                    <li class="menu-item"><a href="index.html">Home</a></li>
+                                    <li class="menu-item"><a href="shop.html?id=4">Shop </a></li>
+                                    <li class="menu-item"><a href="about.php">About</a></li>
+                                    <li class="menu-item"><a href="news.php">News</a></li>
+                                    <li class="menu-item"><a href="contact.php">Contact</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="copyright-info"> Copyright &copy; 2017 <a href="http://lvivek.com/">Spartan Deals </a>
+                        All Rights Reserved
+                    </div>
+                    <div class="copyright-info"> This is for Educational Purpose only. Images and Products are taken
+                        from internet
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="copyright-info"> Copyright &copy; 2017 <a href="http://lvivek.com/">Lakshmanan Vivek </a> All Rights Reserved </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
-<script src="js/vendor/jquery-1.11.3.min.js"></script> 
-<script src="lib/js/jquery.nivo.slider.js" type="text/javascript"></script> 
+</div>
+<div id="login-modal" class="modal fade login" aria-labelledby="myModalLabel" tabindex="-1" role="dialog">
+    <div class="modal-dialog login animated">
+        <form id="login-form" action="index.html" method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" onClick="window.location.reload()" data-dismiss="modal"
+                            aria-hidden="true">&times;
+                    </button>
+                    <h4 class="modal-title">Login with</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="box">
+                        <div class="content">
+                            <div>
+                                <fb:login-button scope="public_profile,email" onlogin="fbLogin();">
+                                </fb:login-button>
+
+                            </div>
+                            <hr style="clear:both;">
+
+
+                            <div class="g-signin2"  data-onsuccess="onSignIn">
+                            </div>
+
+                            <div class="division">
+                                <div class="line l"></div>
+                                <span>or</span>
+                                <div class="line r"></div>
+                            </div>
+
+                            <script type="text/javascript">
+                                function onSignIn(googleUser) {
+                                    var profile = googleUser.getBasicProfile();
+
+                                    var data = [];
+                                    data.push(profile.getName());
+                                    data.push(profile.getEmail());
+
+                                    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+                                    console.log('Name: ' + profile.getName());
+                                    console.log('Image URL: ' + profile.getImageUrl());
+                                    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+                                    console.log(profile);
+                                    closeModal();
+
+                                }
+
+                                function closeModal() {
+                                    // <?php
+                                    // $_SESSION['session_user'] = "google";
+                                    // $_SESSION['session_id'] = "google";
+                                    // ?>
+                                    signOut();
+                                    window.location.reload();
+                                }
+
+                                function signOut() {
+                                    var auth2 = gapi.auth2.getAuthInstance();
+                                    auth2.signOut().then(function () {
+                                        console.log('User signed out.');
+                                    });
+                                }
+
+                                function fbLogin() {
+                                    FB.login(function (response) {
+                                        if (response.status === 'connected') {
+                                            console.log("connected");
+                                            // Logged into your app and Facebook.
+                                            FB.api('/me', {
+                                                fields: 'email,first_name,last_name'
+                                            }, function (response) {
+                                                $.post('socialauth.php', {
+                                                    email: response.email,
+                                                    firstName: response.first_name,
+                                                    lastName: response.last_name
+                                                }).done(function (data) {
+                                                    window.location.reload();
+                                                });
+                                            });
+                                        } else {
+                                            // The person is not logged into this app or we are unable to tell.
+                                            console.log("failed");
+                                        }
+                                    }, {
+                                        scope: 'public_profile,email'
+                                    });
+                                }
+
+                            </script>
+
+                            <h2>Login Account </h2>
+                            <div id="err-msg"></div>
+
+                            <div class="form-group">
+                                <input type="text" id="email" name="email" placeholder="email"
+                                       class="form-control input-lg"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="password" name="password" placeholder="Password"
+                                       class="form-control input-lg"/>
+                            </div>
+                            <div class="form-group">
+                                <div id="captcha"></div>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" id="login" name="login" value="login"
+                                       class="btn btn-primary btn-block btn-lg"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        Don't have an account? <a href="#sign-modal" data-dismiss="modal" data-toggle="modal">Register
+                        Here</a>
+                    </div>
+                </div>
+        </form>
+    </div>
+
+</div>
+</div>
+
+<div id="sign-modal" class="modal fade login" aria-labelledby="myModalLabel" tabindex="-1" role="dialog">
+    <div class="modal-dialog login animated">
+        <form id="sign-form" action="index.html" method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" onClick="window.location.reload()" data-dismiss="modal"
+                            aria-hidden="true">&times;
+                    </button>
+                    <h4 class="modal-title">Register with</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="box">
+                        <div class="content">
+                            <div>
+                                <fb:login-button scope="public_profile,email" onlogin="fbLogin();">
+                                </fb:login-button>
+
+                            </div>
+                            <hr style="clear:both;">
+
+
+                            <div class="g-signin2" data-onsuccess="onSignIn">
+                            </div>
+
+                            <div class="division">
+                                <div class="line l"></div>
+                                <span>or</span>
+                                <div class="line r"></div>
+                            </div>
+
+
+                            <h2>Sign Up to Create Account </h2>
+                            <div id="err-msg"></div>
+
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" name="name" placeholder="Enter Full Name" required
+                                       value="<?php if($error) echo $name; ?>" class="form-control"/>
+                                <span class="text-danger"><?php if (isset($name_error)) echo $name_error; ?></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Email</label>
+                                <input type="text" name="email" placeholder="Email" required
+                                       value="<?php if($error) echo $email; ?>" class="form-control"/>
+                                <span class="text-danger"><?php if (isset($email_error)) echo $email_error; ?></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Password</label>
+                                <input type="password" name="password" placeholder="Password" required
+                                       class="form-control"/>
+                                <span class="text-danger"><?php if (isset($password_error)) echo $password_error; ?></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Confirm Password</label>
+                                <input type="password" name="cpassword" placeholder="Confirm Password" required
+                                       class="form-control"/>
+                                <span class="text-danger"><?php if (isset($cpassword_error)) echo $cpassword_error; ?></span>
+                            </div>
+                            <div class="form-group">
+                                <div id="captcha"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" name="signup" class="btn btn-primary " value="signup">
+                                </input>
+
+                            </div>
+                        </div>
+        </form>
+        <div class="modal-footer">
+            <div class="col-md-4 col-md-offset-4 text-center">
+                Already Registered? <a href="#login-modal" data-dismiss="modal" data-toggle="modal">Login Here</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Footer area-->
+<!-- jquery
+============================================ -->
+<script src="js/vendor/jquery-1.11.3.min.js"></script>
+<!-- bootstrap JS
+============================================ -->
+<script src="js/bootstrap.min.js"></script>
+<!-- wow JS
+============================================ -->
+<script src="js/wow.min.js"></script>
+<!-- price-slider JS
+============================================ -->
+<script src="js/jquery-price-slider.js"></script>
+<!-- collapse JS
+============================================ -->
+<script src="js/jquery.collapse.js"></script>
+<!-- mixitup JS
+============================================ -->
+<script src="js/jquery.mixitup.js"></script>
+<!-- meanmenu JS
+============================================ -->
+<script src="js/jquery.meanmenu.js"></script>
+<!-- owl.carousel JS
+============================================ -->
+<script src="js/owl.carousel.min.js"></script>
+<!-- scrollUp JS
+============================================ -->
+<script src="js/jquery.scrollUp.min.js"></script>
+<!-- social-likes JS
+============================================ -->
+<script src="js/social-likes.min.js"></script>
+<!-- venobox JS
+============================================ -->
+<script src="js/venobox.js"></script>
+<!-- Nivo slider js
+============================================ -->
+<script src="lib/js/jquery.nivo.slider.js" type="text/javascript"></script>
 <script src="lib/home.js" type="text/javascript"></script>
+<!-- plugins JS
+============================================ -->
+<script src="js/plugins.js"></script>
+<!-- main JS
+============================================ -->
+<script src="js/main.js"></script>
+
 </body>
 </html>

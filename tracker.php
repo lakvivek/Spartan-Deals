@@ -1,21 +1,17 @@
 <?php
 session_start();
-
-$servername = "iamvivek.ipagemysql.com";
-$username = "vivek";
-$password = "vivek123";
-$dbname = "marketplace";
-
-$conn =mysql_connect($servername, $username, $password);
-   
-   if(! conn) {
-      die('Could not connect: ' . mysql_error());
-   }
-
-mysql_select_db($dbname);
-
- $getId = $_GET['id'];
- function get_data($url)
+$getId = $_GET['id'];
+$id = $getId[0];
+$store = array(
+    1 => "mtv",
+    2 => "kadart",
+    3 => "ice",
+    4 => "cold",
+    5 => "home",
+    6 => "fashion"
+);
+$key = $store[$id];
+function get_data($url)
 {
     $curl = curl_init();
     $timeout = 5;
@@ -43,82 +39,12 @@ if(isset($getId)) {
     }
 }
 $rows = json_decode($content, true);
-#update cart
-if(isset($_POST['Add_to_Cart']))
-{
-if(isset($_SESSION['session_id']))
-{
-$add_to_cart_productId = $_POST['Add_to_Cart'];
- 
-if(!isset($_POST['cart-quantity']))
- {
- 	$cart_quantity = 1;
- }
-
-else
-{
-	$cart_quantity = $_POST['cart-quantity'];
-}
-
-if(isset($add_to_cart_productId))
-	{
-		
-		$new_product["ProductId"] = $add_to_cart_productId;
-		$new_product["ProductQty"]= $cart_quantity;
-		//add product to session or create new one
-		if(isset($_SESSION["cart_products"]))
-		{  //if session var already exist
-             if(isset($_SESSION["cart_products"][$new_product['ProductId']])) //check item exist in products array
-             {
-                 unset($_SESSION["cart_products"][$new_product['ProductId']]); //unset old array item
-             }           
-        }
-        $_SESSION["cart_products"][$new_product['ProductId']] = $new_product; //update or create product session with new item
-        echo '<script>alert("You have successfully added to the cart."); </script>';
-    }
-}
-}
-
-if(isset($_POST['priceLowHigh']))
-        {                                                                                                                                                                           
-            usort($rows, function($a, $b) {
-                return $a["ProductPrice"] < $b["ProductPrice"] ? -1 : 1;
-            }); 
-        }elseif (isset($_POST['priceHighLow']))
-        {                                                                                                                                                                           
-            usort($rows, function($a, $b) {
-                return $a["ProductPrice"] > $b["ProductPrice"] ? -1 : 1;
-            }); 
-        }elseif (isset($_POST['tagAsc']))
-        {                                                                                                                                                                           
-            usort($rows, function($a, $b) {
-                return $a["ProductTag"] < $b["ProductTag"] ? -1 : 1;
-            }); 
-        }elseif (isset($_POST['tagDesc']))
-        {                                                                                                                                                                           
-            usort($rows, function($a, $b) {
-                return $a["ProductTag"] > $b["ProductTag"] ? -1 : 1;
-            }); 
-        }
-# Add to Wishlist:
-if(isset($_POST['Add_to_Wishlist']))
-{
-if(isset($_SESSION['session_id']))
-{
-$add_to_wishlist_productId = $_POST['Add_to_Wishlist'];
-$add_to_wishlist_userId = $_SESSION['session_id'];
-$sql = "INSERT INTO `Wishlist`". "(ProductId,UserId)". "VALUES('$add_to_wishlist_productId','$add_to_wishlist_userId')";
-$results = mysql_query( $sql, $conn );
-    echo '<script>alert("Added to the wishlist successfully."); </script>';
-if(! $results ) {
-      die('Could not enter data: ' . mysql_error());
-        }
-    }
-}
 
 ?>
 
+
 <html class="no-js" lang="">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -207,10 +133,8 @@ if(! $results ) {
         }
     </script>
 </head>
-<body>
-<!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-<![endif]-->
+
+<body class="home">
 <header>
     <div class="header-container">
         <div class="container">
@@ -218,10 +142,10 @@ if(! $results ) {
                 <div class="topbar-content">
                     <div class="header-email widget">
                         <i class="fa fa-envelope"></i><strong>Email:</strong> <a
-                            href="mailto:viveklakshmanan@live.com ">spartandeals6@gmail.com </a>
+                                href="mailto:viveklakshmanan@live.com ">spartandeals6@gmail.com </a>
                     </div>
                     <div class="header-phone widget"><i class="fa  fa-phone"></i><strong>Phone:</strong><a
-                            href="tel:+16692924707"> (669) 272-4707</a></div>
+                                href="tel:+16692924707"> (669) 272-4707</a></div>
                     <div class="top-menu widget">
                         <div class="menu-top-menu-container">
                             <ul class="nav_menu" id="menu-top-menu">
@@ -234,7 +158,7 @@ if(! $results ) {
                                 <li class="menu-item"><a href="logout.php">Logout</a></li>
                                 ';
                                 } else {
-                                echo '
+                                    echo '
                                 <li class="menu-item"><a href="#" data-toggle="modal" data-target="#sign-modal">Sign
                                     up</a></li>
                                 <li class="menu-item"><a href="#" data-toggle="modal"
@@ -283,14 +207,14 @@ if(! $results ) {
 															</span>
                                                                     </a>
                                                                 </li>
-                                                                <li class="menu-item active">
+                                                                <li class="menu-item">
                                                                     <a class="item_link" href="shop.html?id=4">
 															<span class="link_content">
 																<span class="link_text">Shop</span>
 															</span>
                                                                     </a>
                                                                 </li>
-                                                                <li class="menu-item">
+                                                                <li class="menu-item active">
                                                                     <a class="item_link" href="tracker.php?id=4">
 															<span class="link_content">
 																<span class="link_text">Tracker</span>
@@ -350,14 +274,13 @@ if(! $results ) {
         </div>
     </div>
 </header>
-
 <div class="clear"></div>
 <div class="shop-header-area">
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12">
                 <div class="shop-header-title">
-                    <h1>Shop All Products</h1>
+                    <h2>User Tracking</h2>
                     <div class="shop-menu">
                         <ul>
                             <li><a <?php if(isset($getId) && $getId == 4)  echo 'class="active"';?>href="?id=4">Cold Stone</a></li>
@@ -375,71 +298,49 @@ if(! $results ) {
 </div>
 <div class="main-container">
     <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="breadcrumbs all-product-view-mode">
-                    <a href="index.html">Home</a><span class="separator">&gt;</span><span> Shop</span>
-                </div>
-            </div>
-        </div>
         <div class="all-product-sidebar-area">
             <div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                    <aside class="widget shop-filter fix">
-                        <h3 class="sidebar-title">Sort</h3>
-                        <div class="info_widget">
-                            <div class="price_filter">
-                                <div class="sidebar-menu">
-                                    <form method="post">
-                                          <input style="width: 180px; margin-bottom: 10px;" type="submit"  value="Price :Low to High" name="priceLowHigh" / ><br>
-                                          <input style="width: 180px; margin-bottom: 10px;" type="submit"  value="Price :High to Low" name ="priceHighLow"/><br>
-                                          <input type="submit" style="width: 180px; margin-bottom: 10px;" value="Tag :Ascending" name ="tagAsc"/><br>
-                                          <input type="submit" style="width: 180px; margin-bottom: 10px;"  value="Tag :Descending" name = "tagDesc"/><br>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </aside>
-                    <aside class="widget filter-by">
-                        <h3 class="sidebar-title">Filter by</h3>
-                        <ul class="sidebar-menu">
-                            <li><a href="shop.html?id=4">Cold Stone</a></li>
-                            <li><a href="shop.html?id=6">Fashionista</a></li>
-                            <li><a href="shop.html?id=5">Home Decors</a></li>
-                            <li><a href="shop.html?id=3">Ice Modders</a></li>
-                            <li><a href="shop.html?id=2">Kadart</a></li>
-                            <li><a href="shop.html?id=1">MTV Connect</a></li>
-                        </ul>
-                    </aside>
-                </div>
                 <div class="col-md-9 fix">
                     <div class="all-product-list-grid-area">
                         <div class="row">
-                            <div class="tab-content">
+                            <!-- Tab panes -->
+                            <div class="tab-content text-center">
                                 <div role="tabpanel" class="tab-pane active" id="grid">
                                     <div class="ma-bestsellerproductslider-container">
                                         <?php
-												echo '<form action="shop.html?id=' . $getId .'" method="post">';
                                         // output data of each row
-                                        foreach ($rows as $row ) {
-                                        $productId = $row["ProductId"];
-                                        $productTag = $row["ProductTag"];
-                                        $productName = $row["ProductName"];
-                                        $productPrice = $row["ProductPrice"];
-                                        $productDesc = $row["ProductDesc"];
-                                        $MRP = (int)$productPrice + 2;
-                                        echo '<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                        if(!isset($_COOKIE[$key + "-tracker"])) {
+                                            echo "<p class='text-center'> No Data to display</p>";
+                                        }
+                                        if(isset($_COOKIE[$key + '-tracker'])) {
+                                            $prod = $_COOKIE[$key + '-tracker'];
+                                            $prod = stripslashes($prod);    // string is stored with escape double quotes
+                                            $prod = json_decode($prod, true);
+                                        }
+                                        foreach ($prod as $prod_id) {
+
+
+                                            foreach ($rows as $row ) {
+                                                $productId = $row["ProductId"];
+                                                $productTag = $row["ProductTag"];
+                                                $productName = $row["ProductName"];
+                                                $productPrice = $row["ProductPrice"];
+                                                $productDesc = $row["ProductDesc"];
+                                                $MRP = (int)$productPrice + 2;
+                                                if ($prod_id == $productId) {
+                                                    echo '<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                                         <div class="single-item">
                                             <div class="s-product-img">
                                                 <a href="product.html?pid='.$productId .'">
                                                     <img alt="" src="img/product/' .  $productId . '.jpg" class="primary-image">
                                                 </a>
                                                 <div class="price-rate">
+                                                    <!-- Single product hover view-->
                                                     <div class="global-table">
                                                         <div class="global-row">
                                                             <div class="global-cell">
                                                                 <div class="hover-view-content">
-																	<a href="#" class="modal-view detail-link quickview" data-toggle="modal" data-target="#productModal' . $productId . '">Quick View</a>
+                                                                    <a href="shop-category.html#" class="modal-view detail-link quickview" data-toggle="modal" data-target="#productModal' . $productId . '">Quick View</a>
                                                                     <div class="ratings">
                                                                         <ul>
                                                                             <li>
@@ -461,12 +362,14 @@ if(! $results ) {
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <!--/ Single product hover view-->
                                                 </div>
                                                 <div class="pro-action">
                                                     <div class="product-cart-area-list">
-														<div class="cart-btn btn-add-to-cart"><button type="submit" name="Add_to_Cart" value="' . $productId .'"><i class="fa fa-shopping-cart"></i>ADD TO CART
-														</button></div>
-                                                        <div class="cart-btn right link-compare"><button type="submit" name="Add_to_Wishlist" value="' . $productId .'"><i class="fa fa-heart-o"></i></button></div>
+                                                        <div class="cart-btn btn-add-to-cart"><a href="shop-category.html#"><i class="fa fa-shopping-cart"></i>ADD TO CART
+                                                        </a></div>
+                                                        <div class="cart-btn right link-compare"><a href="shop-category.html#" data-toggle="tooltip" data-placement="top" title="Add To Wishlist" ><i class="fa fa-heart-o"></i>
+                                                        </a></div>
 
                                                     </div>
                                                 </div>
@@ -476,9 +379,10 @@ if(! $results ) {
                                             </div>
                                         </div>
                                     </div>';
+                                                }
+                                            }
                                         }
                                         ?>
-								</form>
                                     </div>
                                 </div>
                             </div>
@@ -491,7 +395,8 @@ if(! $results ) {
     </div>
 </div>
 
-<div class="footer" style="margin-top: 140px;">
+
+<div class="footer">
     <div class="footer-bottom">
         <div class="container">
             <div class="row">
@@ -500,83 +405,23 @@ if(! $results ) {
                         <div class="menu-customer-care-container">
                             <nav>
                                 <ul class="nav_menu">
-                                    <li class="menu-item"> <a href="index.html">Home</a> </li>
-                                    <li class="menu-item"> <a href="shop.html">Shop </a> </li>
-                                    <li class="menu-item"> <a href="#">About</a> </li>
-                                    <li class="menu-item"> <a href="#">News</a> </li>
-                                    <li class="menu-item"> <a href="#">Contact</a> </li>
+                                    <li class="menu-item"><a href="index.html">Home</a></li>
+                                    <li class="menu-item"><a href="shop.html">Shop </a></li>
+                                    <li class="menu-item"><a href="about.html">About</a></li>
+                                    <li class="menu-item"><a href="news.html">News</a></li>
+                                    <li class="menu-item"><a href="contact.html">Contact</a></li>
                                 </ul>
                             </nav>
                         </div>
                     </div>
-                    <div class="copyright-info"> Copyright &copy; 2017 <a href="http://lvivek.com/">Spartan Deals </a>
-                        All Rights Reserved
-                    </div>
-                    <div class="copyright-info"> This is for Educational Purpose only. Images and Products are taken
-                        from internet
+                    <div class="copyright-info"> Copyright &copy; 2017 <a href="http://lvivek.com/">Lakshmanan
+                            Vivek </a> All Rights Reserved
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<div id="quickview-wrapper">
-    <?php
-
-    foreach ($rows as $row ) {
-    $productId = $row["ProductId"];
-    $productTag = $row["ProductTag"];
-    $productName = $row["ProductName"];
-    $productPrice = $row["ProductPrice"];
-    $productDesc = $row["ProductDesc"];
-    $MRP = (int)$productPrice + 2;
-    echo'<div class="modal fade" id="productModal' . $productId . '" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            <div class="modal-body">
-                <div class="modal-product">
-                    <div class="product-images">
-                        <div class="main-image images">
-                            <img alt="" src="img/product/' .  $productId . '.jpg">
-                        </div>
-                    </div>
-
-                    <div class="product-info">
-                        <h1>' . $productName . '</h1>
-                        <div class="price-box-3">
-                            <div class="s-price-box">
-                                <span class="new-price">$' . $productPrice . '</span>
-                                <span class="old-price">$'. $MRP . '</span>
-                            </div>
-                        </div>
-                        <div class="quick-add-to-cart">
-							<form class="cart" action="shop.html?id=' . $getId .'" method="post">
-                                <div class="numbers-row">
-									<input type="number" id="french-hens" value="2" name="cart-quantity">
-                                </div>
-								<button class="single_add_to_cart_button" name="Add_to_Cart" type="submit" value ="'.$productId.'">Add to cart</button>
-                                <div class="cart-btn right link-compare"><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Wishlist" ><button type="submit" name="Add_to_Wishlist" value="' . $productId .'"><i class="fa fa-heart-o"></i>
-                                                        </a></div>
-                            </form>
-                        </div>
-                        <div class="quick-desc">
-                            This is a very good product. Please buy this product and help us.
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>';
-    }
-    ?>
-</div>
-
 <div id="login-modal" class="modal fade login" aria-labelledby="myModalLabel" tabindex="-1" role="dialog">
     <div class="modal-dialog login animated">
         <form id="login-form" action="index.html" method="POST">
@@ -596,8 +441,6 @@ if(! $results ) {
 
                             </div>
                             <hr style="clear:both;">
-
-
                             <div class="g-signin2"  data-onsuccess="onSignIn">
                             </div>
 
@@ -610,27 +453,18 @@ if(! $results ) {
                             <script type="text/javascript">
                                 function onSignIn(googleUser) {
                                     var profile = googleUser.getBasicProfile();
-
-                                    var data = [];
-                                    data.push(profile.getName());
-                                    data.push(profile.getEmail());
-
-                                    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-                                    console.log('Name: ' + profile.getName());
-                                    console.log('Image URL: ' + profile.getImageUrl());
-                                    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-                                    console.log(profile);
-                                    closeModal();
-
-                                }
-
-                                function closeModal() {
-                                    // <?php
-                                    // $_SESSION['session_user'] = "google";
-                                    // $_SESSION['session_id'] = "google";
-                                    // ?>
+                                    var email = profile.getEmail();
+                                    var name = profile.getName();
+                                    name = name.split(" ");
                                     signOut();
-                                    window.location.reload();
+                                    $.post('socialauth.php', {
+                                        email: email,
+                                        firstName: name[0],
+                                        lastName: name[1]
+                                    }).done(function (data) {
+                                        window.location.reload();
+                                    });
+                                    closeModal();
                                 }
 
                                 function signOut() {
@@ -689,7 +523,7 @@ if(! $results ) {
                     </div>
                     <div class="modal-footer">
                         Don't have an account? <a href="#sign-modal" data-dismiss="modal" data-toggle="modal">Register
-                        Here</a>
+                            Here</a>
                     </div>
                 </div>
         </form>
@@ -776,19 +610,7 @@ if(! $results ) {
 </div>
 
 <script src="js/vendor/jquery-1.11.3.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/wow.min.js"></script>
-<script src="js/jquery-price-slider.js"></script>
-<script src="js/jquery.collapse.js"></script>
-<script src="js/jquery.mixitup.js"></script>
-<script src="js/jquery.meanmenu.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/jquery.scrollUp.min.js"></script>
-<script src="js/social-likes.min.js"></script>
-<script src="js/venobox.js"></script>
 <script src="lib/js/jquery.nivo.slider.js" type="text/javascript"></script>
 <script src="lib/home.js" type="text/javascript"></script>
-<script src="js/plugins.js"></script>
-<script src="js/main.js"></script>
 </body>
 </html>

@@ -1,94 +1,11 @@
 <?php
-session_start();
 if (!isset($_GET['pid'])) {
     die();
 }
 
+
 $getId = $_GET['pid'];
 $id = $getId[0];
-
-$store = array(
-    1 => "mtv",
-    2 => "kadart",
-    3 => "ice",
-    4 => "cold",
-    5 => "home",
-    6 => "fashion"
-);
-
-if(!isset($_COOKIE['all'])) {
-    $all = array(
-        "1st" => $getId,
-        "2nd" => 0,
-        "3rd" => 0,
-        "4th" => 0,
-        "5th" => 0
-    );
-    $all = json_encode($all, true);
-    setcookie('all', $all);
-}
-
-$key = $store[$id];
-
-if(!isset($_COOKIE[$key + '-tracker'])) {
-    $value = array(
-        0 => $getId
-    );
-    $value = json_encode($value, true);
-    setcookie($key + '-tracker',$value);
-}
-
-if(isset($_COOKIE[$key + '-tracker'])) {
-    $prod = $_COOKIE[$key + '-tracker'];
-    $prod = stripslashes($prod);    // string is stored with escape double quotes 
-    $prod = json_decode($prod, true);
-    array_push($prod, $getId);
-    $prod = json_encode($prod, true);
-    setcookie($key + '-tracker',$prod,time() + (86400*50));
-}
-
-if(!isset($_COOKIE[$store[$id]])) {
-    $value = array(
-        "1st" => $getId,
-        "2nd" => 0,
-        "3rd" => 0,
-        "4th" => 0,
-        "5th" => 0
-    );
-    $value = json_encode($value, true);
-    setcookie($key, $value);
-}
-
-if(isset($_COOKIE[$key]))
-{
-    $prod = $_COOKIE[$key];
-    $prod = stripslashes($prod);    // string is stored with escape double quotes 
-    $prod = json_decode($prod, true);
-    $prod["5th"] = $prod["4th"];
-    $prod["4th"] = $prod["3rd"];
-    $prod["3rd"] = $prod["2nd"];
-    $prod["2nd"] = $prod["1st"];
-    $prod["1st"] = $getId;
-
-    $prod = json_encode($prod, true);
-    setcookie($key,$prod,time() + (86400*50));
-}
-
-if(isset($_COOKIE['all']))
-{
-    $prod = $_COOKIE['all'];
-    $prod = stripslashes($prod);    // string is stored with escape double quotes 
-    $prod = json_decode($prod, true);
-    $prod["5th"] = $prod["4th"];
-    $prod["4th"] = $prod["3rd"];
-    $prod["3rd"] = $prod["2nd"];
-    $prod["2nd"] = $prod["1st"];
-    $prod["1st"] = $getId;
-
-    $prod = json_encode($prod, true);
-    setcookie('all',$prod,time() + (86400*50));
-}
-
 function get_data($url)
 {
     $curl = curl_init();
@@ -133,12 +50,8 @@ if ($conn->connect_error) {
 
 if (isset($_POST['rating']) && !empty($_POST['rating'])) {
 
-    if(isset($_SESSION['session_id'])) {
-        $user = $_SESSION['session_id'];
-        $username = $_SESSION['session_user'];
-    }
-    $user = $_SESSION['session_id'];
-    $username = $_SESSION['session_user'];
+    $user = 2;
+    $username = 'Admin';
     $productId = $_GET['pid'];
     $rating = $_POST['rating'];
     $comments = $_POST['comments'];
@@ -149,7 +62,7 @@ if (isset($_POST['rating']) && !empty($_POST['rating'])) {
     if ($conn->query($sql) === TRUE) {
         echo '<script type="text/javascript"> alert("Rating and Comments Successfully added"); </script>';
     } else {
-echo '<script> alert("You can only review once. Sorry!!! :(");</script>';
+        echo "Error: " . $sql . "<br>" . $conn->error;
     }
 }
 
@@ -187,54 +100,9 @@ if ($avg_result->num_rows > 0) {
 $all_comments_sql = "SELECT * FROM  `Review` WHERE ProductId =$getId";
 $all_result = $conn->query($all_comments_sql);
 
-# Update Cart
-if(isset($_POST['Add_to_Cart']))
-{
-if(isset($_SESSION['session_id']))
-{
-$add_to_cart_productId = $_POST['Add_to_Cart'];
 
-if(!isset($_POST['cart-quantity']))
-{
-$cart_quantity = 1;
-}
-else
-{
-$cart_quantity = $_POST['cart-quantity'];
-}
-
-if(isset($add_to_cart_productId))
-{
-$add_to_cart_productId = $getId;
-
-$new_product["ProductId"] = $add_to_cart_productId;
-$new_product["ProductQty"]= $cart_quantity;
-//add product to session or create new one
-if(isset($_SESSION["cart_products"]))
-{  //if session var already exist
-if(isset($_SESSION["cart_products"][$new_product['ProductId']])) //check item exist in products array
-{
-unset($_SESSION["cart_products"][$new_product['ProductId']]); //unset old array item
-}
-}
-$_SESSION["cart_products"][$new_product['ProductId']] = $new_product; //update or create product session with new item
-echo '<script>alert("You have successfully added to the cart."); </script>';
-}
-}
-}
-
-$sql_most =  "UPDATE Most
-SET counter = counter + 1
-WHERE ProductId = '$getId'";
-
-if ($conn->query($sql_most) === TRUE) {
-echo 'updated';
-} else {
-echo "Error: " . $sql . "<br>" . $conn->error;
-}
 
 $conn->close();
-
 ?>
 <html class="no-js" lang="">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
@@ -350,43 +218,30 @@ $conn->close();
 <body class="home">
 <header>
     <div class="header-container">
+        <!--header top start-->
         <div class="container">
             <div class="top-bar">
                 <div class="topbar-content">
                     <div class="header-email widget">
                         <i class="fa fa-envelope"></i><strong>Email:</strong> <a
-                            href="mailto:viveklakshmanan@live.com ">spartandeals6@gmail.com </a>
+                                href="mailto:viveklakshmanan@live.com ">viveklakshmanan@live.com </a>
                     </div>
                     <div class="header-phone widget"><i class="fa  fa-phone"></i><strong>Phone:</strong><a
-                            href="tel:+16692924707"> (669) 272-4707</a></div>
+                                href="tel:+16692924707"> (669) 272-4707</a></div>
                     <div class="top-menu widget">
                         <div class="menu-top-menu-container">
                             <ul class="nav_menu" id="menu-top-menu">
-                                <?php
-                                if(isset($_SESSION['session_user'])) {
-                                    echo '<li class="menu-item  first"><a href="my-account.html?uid=' . $_SESSION['session_id'] . '">My Account</a></li>
-                                <li class="menu-item"><a href="wishlist.php">My Wishlist</a></li>
-                                <li class="menu-item"><a href="shopping-cart.php">Shopping Cart</a></li>
-                                <li class="menu-item"><a href="checkout.php">Checkout</a></li>
-                                <li class="menu-item"><a href="logout.php">Logout</a></li>
-                                ';
-                                } else {
-                                echo '
-                                <li class="menu-item"><a href="#" data-toggle="modal" data-target="#sign-modal">Sign
-                                    up</a></li>
-                                <li class="menu-item"><a href="#" data-toggle="modal"
-                                                         data-target="#login-modal">Login</a></li>
-                                ';
-                                }
-
-                                ?>
-
+                                <li class="menu-item  first"><a href="my-account.php">My Account</a></li>
+                                <li class="menu-item"><a href="wishlist.html">My Wishlist</a></li>
+                                <li class="menu-item"><a href="shopping-cart.html">Shopping Cart</a></li>
+                                <li class="menu-item"><a href="checkout.html">Checkout</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!--header top end-->
         <div class="header">
             <div class="container">
                 <div class="row">
@@ -413,7 +268,7 @@ $conn->close();
                                                     <div class="menu_inner">
                                                         <nav>
                                                             <ul class="mega_main_menu_ul" id="mega_main_menu_ul_first">
-                                                                <li class="menu-item">
+                                                                <li>
                                                                     <a class="item_link" href="index.html">
 															<span class="link_content">
 																<span class="link_text">Home</span>
@@ -428,21 +283,28 @@ $conn->close();
                                                                     </a>
                                                                 </li>
                                                                 <li class="menu-item">
-                                                                    <a class="item_link" href="tracker.php?id=4">
+                                                                    <a class="item_link" href="blog.html">
 															<span class="link_content">
-																<span class="link_text">Tracker</span>
+																<span class="link_text">Blog</span>
 															</span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="menu-item">
-                                                                    <a class="item_link" href="about.html">
+                                                                    <a class="item_link" href="index.html#">
 															<span class="link_content">
-																<span class="link_text">About</span>
+																<span class="link_text">Portfolio</span>
 															</span>
                                                                     </a>
                                                                 </li>
                                                                 <li class="menu-item">
-                                                                    <a class="item_link" href="contact.html">
+                                                                    <a class="item_link" href="index.html#">
+															<span class="link_content">
+																<span class="link_text">Pages</span>
+															</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="menu-item">
+                                                                    <a class="item_link" href="contact-us.html">
 															<span class="link_content">
 																<span class="link_text">Contact Us</span>
 															</span>
@@ -451,8 +313,11 @@ $conn->close();
                                                             </ul>
                                                         </nav>
                                                     </div>
+                                                    <!-- /class="menu_inner" -->
                                                 </div>
+                                                <!-- /class="menu_holder" -->
                                             </div>
+                                            <!-- /id="mega_main_menu" -->
                                         </div>
                                     </div>
                                 </div>
@@ -462,25 +327,27 @@ $conn->close();
                 </div>
                 <div class="row">
                     <div class="col-sm-12 hidden-md hidden-lg">
+                        <!-- Main Menu End -->
                         <div class='mobile-menu-area'>
                             <nav id="mobile-menu">
                                 <ul>
                                     <li><a href="index.html">Home</a>
                                     </li>
-                                    <li><a href="shop.html?id=4">Shop</a>
+                                    <li><a href="shop.html">Shop</a>
 
                                     </li>
-                                    <li><a href="#">Tracker</a>
+                                    <li><a href="blog.html">Blog</a>
 
                                     </li>
-                                    <li><a href="#">About</a>
+                                    <li><a href="portfolio-detailas.html">Portfolio</a>
 
                                     </li>
-                                    <li><a href="#">Contact Us</a>
+                                    <li><a href="index.html#">Pages</a>
                                     </li>
                                 </ul>
                             </nav>
                         </div>
+                        <!-- Main Menu End -->
                     </div>
                 </div>
             </div>
@@ -572,17 +439,16 @@ $conn->close();
         }
     }
     ?>
-    <form action="product.html?pid=<?php echo $getId?>" method="post">
+    <form action="#">
         <div class="quantity1">
             <input type="number" value="1">
-            <button type="submit" name="Add_to_Cart" value="<?php echo $getID ?>"><i class="fa fa-shopping-cart"></i>ADD TO CART
-        </button>
+            <button type="submit"><i class="fa fa-shopping-cart"></i>Add to cart</button>
         </div>
     </form>
     <div class="clear"></div>
     <br/>
     <br/>
-    <form action="product.html?pid=<?php echo $getId; ?>" method="post">
+    <form action="product.php?pid=<?php echo $getId; ?>" method="post">
         <h3>Enter your Rating</h3>
         <fieldset id='demo1' class="rating">
             <input class="stars" type="radio" id="star5" name="rating" value="5"/>
@@ -640,7 +506,7 @@ $conn->close();
             }
             echo '<span>  ' . $current_rating . ' out of 5 stars</span>';
             echo '<span>&nbsp; &nbsp; | &nbsp; &nbsp;' . $row['Comments'] . '...</span></div>';
-            echo '<div> <span>By: ' . $row['UserName'] . '   | on May 18th 2017</span></div>';
+            echo '<div> <span>By: ' . $row['UserName'] . '   | on May 19th 2017</span></div>';
             echo '<div style="font-size: 30px; margin-bottom: 40px; margin-top: 10px;">'. $row['Comments'] .'</div>';
 
         }
